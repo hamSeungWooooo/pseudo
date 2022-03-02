@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.SecureRandom;
 
 @Controller
@@ -15,7 +16,11 @@ public class PseudoController {
 
     /*by userId*/
     @RequestMapping("/v1/user/{userId}")
-    public ResponseEntity<UserDataDownloadResponseListDto> getByUserId(@PathVariable String userId){
+    public ResponseEntity<UserDataDownloadResponseListDto> getByUserId(@PathVariable String userId, HttpServletRequest request){
+
+        String authorization = request.getHeader("authorization");
+        System.out.println("authorization = " + authorization);
+
         UserDataDownloadResponseListDto pseudo = new UserDataDownloadResponseListDto(
                 "it is test - kind",
                 99,
